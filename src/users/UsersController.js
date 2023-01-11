@@ -7,7 +7,7 @@ const usersController = {
       res.json({
         userData: {
           ...user,
-          password: undefined
+          password: undefined // remove password from response
         }
       })
     } catch (err) {
@@ -16,7 +16,6 @@ const usersController = {
   },
   registerUser: async (req, res, next) => {
     try {
-      console.lo
       const createdUser = await usersService.addUser(req.body)
       res.json({ id: createdUser.id })
     } catch (err) {
