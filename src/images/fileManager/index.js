@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto'
 import multer from 'multer'
 import path from 'path'
+import { CustomError } from '../../models/CustomError.js'
 
 const imagesPath =
   process.env.NODE_ENV === 'production'
@@ -22,7 +23,7 @@ export const uploadImage = multer({
     const allowed = ['.jpg', '.jpeg', '.png']
     const ext = path.extname(file.originalname).toLowerCase()
     if (allowed.some((t) => ext.includes(t))) cb(null, true)
-    else cb(new Error('Only images are allowed.'))
+    else cb(new CustomError('Only images are allowed.', 405))
   },
   limits: {
     fileSize: 8 * 1000 * 1024 // 8MB
