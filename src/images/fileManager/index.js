@@ -1,16 +1,12 @@
 import { randomUUID } from 'crypto'
 import multer from 'multer'
 import path from 'path'
+import { config } from '../../config/index.js'
 import { CustomError } from '../../models/CustomError.js'
-
-const imagesPath =
-  process.env.NODE_ENV === 'production'
-    ? process.env.STATIC_PATH
-    : 'public/images'
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, imagesPath)
+    cb(null, config.staticPath)
   },
   filename: function (req, file, cb) {
     cb(null, randomUUID() + path.extname(file.originalname).toLowerCase())

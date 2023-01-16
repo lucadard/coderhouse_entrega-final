@@ -1,10 +1,11 @@
 import passport from 'passport'
 import { Strategy, ExtractJwt } from 'passport-jwt'
+import { config } from '../config/index.js'
 import { usersService } from '../users/index.js'
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET
+  secretOrKey: config.jwtSecret
 }
 
 const JwtStrategy = new Strategy(options, async function (payload, done) {

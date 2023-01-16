@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
-import * as dotenv from 'dotenv'
-dotenv.config()
+import { config } from '../config/index.js'
 
 export default class Dao {
   #collection
@@ -12,7 +11,7 @@ export default class Dao {
   }
 
   connect() {
-    mongoose.connect(process.env.MONGO_URL)
+    mongoose.connect(config.mongoUrl)
     mongoose.connection.on('connected', () =>
       console.log(`MongoDB: Connected to ${this.#collectionName} collection.`)
     )

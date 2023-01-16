@@ -3,6 +3,7 @@ import { User } from './models/User.js'
 import { CustomError } from '../models/CustomError.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { config } from '../config/index.js'
 
 const createHash = (password) => {
   if(!password) throw new CustomError('Password not provided', 400)
@@ -10,7 +11,7 @@ const createHash = (password) => {
 }
 const isPasswordValid = (user, password) =>
   bcrypt.compareSync(password, user.password)
-const generateAccessToken = (user) => jwt.sign(user, process.env.JWT_SECRET)
+const generateAccessToken = (user) => jwt.sign(user, config.jwtSecret)
 
 export class UsersService {
   #repository
