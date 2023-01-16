@@ -37,4 +37,11 @@ export class CartsService {
     if (!updatedCart) throw new CustomError('Could not update cart.', 500)
     return updatedCart.asDto()
   }
+  emptyCart = async (userId) => {
+    const cart = await this.#repository.getById(userId)
+    cart.removeAllProducts()
+    const updatedCart = await this.#repository.updateById(userId, cart)
+    if (!updatedCart) throw new CustomError('Could not update cart.', 500)
+    return updatedCart.asDto()
+  }
 }
