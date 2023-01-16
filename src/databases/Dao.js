@@ -36,6 +36,13 @@ export default class Dao {
       .lean()
     return documents
   }
+  async getAll() {
+    const documents = await this.#collection
+      .find({})
+      .select({ _id: 0, __v: 0 })
+      .lean()
+    return documents
+  }
   async insert(item) {
     const newItem = new this.#collection(item)
     await newItem.save()
@@ -48,12 +55,12 @@ export default class Dao {
       .lean()
     return updatedItem
   }
-  async removeById(id) {
-    const removedItem = await this.#collection
+  async deleteById(id) {
+    const deletedItem = await this.#collection
       .findOneAndRemove({ id })
       .select({ _id: 0, __v: 0 })
       .lean()
-    return removedItem
+    return deletedItem
   }
   async count() {
     return await this.#collection.count({})
