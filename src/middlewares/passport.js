@@ -16,4 +16,4 @@ passport.use(JwtStrategy)
 
 export const passportMiddleware = passport.initialize()
 
-export const authenticateUser = passport.authenticate('jwt', { session: false })
+export const isLogged = passport.authenticate('jwt', { session: false })
