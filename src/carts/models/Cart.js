@@ -28,6 +28,9 @@ export class Cart {
     if (productQuantity < 1) this.#products.splice(productIndex, 1)
     else this.#products[productIndex].cant = productQuantity
   }
+  removeAllProducts = () => {
+    this.#products = []
+  }
   asDto = () =>
     Object.freeze({
       id: this.#id,
