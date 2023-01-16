@@ -1,3 +1,4 @@
+import { cartsService } from '../carts/index.js'
 import { usersService } from './index.js'
 
 const usersController = {
@@ -17,6 +18,7 @@ const usersController = {
   registerUser: async (req, res, next) => {
     try {
       const createdUser = await usersService.addUser(req.body)
+      const createdCart = await cartsService.createCart(createdUser.id)
       res.json({ id: createdUser.id })
     } catch (err) {
       next(err)

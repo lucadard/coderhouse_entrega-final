@@ -1,10 +1,13 @@
 import { randomUUID } from 'crypto'
 import { User } from './models/User.js'
+import { CustomError } from '../models/CustomError.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const createHash = (password) =>
-  bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+const createHash = (password) => {
+  if(!password) throw new CustomError('Password not provided', 400)
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+}
 const isPasswordValid = (user, password) =>
   bcrypt.compareSync(password, user.password)
 const generateAccessToken = (user) => jwt.sign(user, process.env.JWT_SECRET)
@@ -16,7 +19,8 @@ export class UsersService {
   }
   getUserById = async (userId) => {
     const user = await this.#repository.getById(userId)
-    return user ? user.asDto() : undefined
+    if (!user) throw new CustomError('User not found.', 404)
+    return user.asDto()
   }
   addUser = async (userData) => {
     const newUser = new User({
@@ -25,13 +29,15 @@ export class UsersService {
       password: createHash(userData.password)
     })
     const createdUser = await this.#repository.create(newUser)
-    return createdUser ? createdUser.asDto() : undefined
+    if (!createdUser) throw new CustomError('Could not create user.', 500)
+    return createdUser.asDto()
   }
   login = async (email, password) => {
     const [user] = await this.#repository.getByQuery({ email })
-    if (!isPasswordValid(user.asDto(), password))
-      throw new Error('Invalid credentials')
+    if (!user) throw new CustomError('User not found.', 404)
 
+    if (!isPasswordValid(user.asDto(), password))
+      throw new CustomError('Invalid credentials', 401)
     return generateAccessToken({ id: user.asDto().id })
   }
 }
