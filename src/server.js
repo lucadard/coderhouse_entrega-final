@@ -3,12 +3,12 @@ import express from 'express'
 import { authRouter } from './auth/index.js'
 import { imagesRouter } from './images/index.js'
 // import { ordersRouter } from './orders/index.js'
-// import { shoppingCartsRouter } from './shoppingCarts/index.js'
-// import { productsRouter } from './products/index.js'
+import { cartsRouter } from './carts/index.js'
+import { productsRouter } from './products/index.js'
 import { usersRouter } from './users/index.js'
 
-import { errorHandler } from './middlewares/errorHandler.js'
 import { passportMiddleware } from './middlewares/passport.js'
+import { errorHandler } from './middlewares/error.js'
 
 const app = express()
 
@@ -22,8 +22,8 @@ app.use(passportMiddleware)
 app.use('/login', authRouter)
 app.use('/api/images', imagesRouter)
 // app.use('/api/orders', ordersRouter)
-// app.use('/api/products', productsRouter)
-// app.use('/api/shoppingcartproducts', shoppingCartsRouter)
+app.use('/api/products', productsRouter)
+app.use('/api/shoppingcartproducts', cartsRouter)
 app.use('/api/users', usersRouter)
 app.use(errorHandler)
 
