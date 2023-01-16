@@ -2,7 +2,7 @@ import express from 'express'
 
 import { authRouter } from './auth/index.js'
 import { imagesRouter } from './images/index.js'
-// import { ordersRouter } from './orders/index.js'
+import { ordersRouter } from './orders/index.js'
 import { cartsRouter } from './carts/index.js'
 import { productsRouter } from './products/index.js'
 import { usersRouter } from './users/index.js'
@@ -21,7 +21,7 @@ app.use(passportMiddleware)
 /* ROUTES */
 app.use('/login', authRouter)
 app.use('/api/images', imagesRouter)
-// app.use('/api/orders', ordersRouter)
+app.use('/api/orders', ordersRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/shoppingcartproducts', cartsRouter)
 app.use('/api/users', usersRouter)
