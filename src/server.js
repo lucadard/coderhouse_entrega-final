@@ -9,14 +9,17 @@ import { usersRouter } from './users/index.js'
 
 import { passportMiddleware } from './middlewares/passport.js'
 import { errorHandler } from './middlewares/error.js'
+import { config } from './config/index.js'
+import cors from 'cors'
 
 const app = express()
 
 /* MIDDLEWARES */
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/public', express.static('public'))
+app.use(config.staticPath.url, express.static(config.staticPath.folder))
 app.use(passportMiddleware)
+app.use(cors())
 
 /* ROUTES */
 app.use('/login', authRouter)
