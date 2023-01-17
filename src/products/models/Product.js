@@ -1,4 +1,5 @@
-import { CustomError } from '../../models/CustomError.js'
+import { validateData } from '../../config/validation.js'
+import { productSchema, updateSchema } from '../schemas/joiSchema.js'
 
 export class Product {
   #id
@@ -7,13 +8,19 @@ export class Product {
   #price
   #image
   constructor(product) {
-    // DO DATA VALIDATION HERE!
-    if (!product) throw new CustomError('Invalid product data', 400)
-    this.#id = product.id
-    this.#name = product.name
-    this.#description = product.description
-    this.#price = product.price
-    this.#image = product.image
+    const data = validateData(productSchema, product, 'Invalid product data.')
+    this.#id = data.id
+    this.#name = data.name
+    this.#description = data.description
+    this.#price = data.price
+    this.#image = data.image
+  }
+  update(newData) {
+    const data = validateData(updateSchema, newData, 'Invalid product data.')
+    this.#name = data.name ?? this.#name
+    this.#description = data.description ?? this.#description
+    this.#price = data.price ?? this.#price
+    this.#image = data.image ?? this.#image
   }
   asDto = () =>
     Object.freeze({

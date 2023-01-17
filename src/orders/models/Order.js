@@ -1,4 +1,5 @@
-import { CustomError } from '../../models/CustomError.js'
+import { validateData } from '../../config/validation.js'
+import { orderSchema } from '../schemas/joiSchema.js'
 
 export class Order {
   #id
@@ -6,12 +7,11 @@ export class Order {
   #prods
   #createdAt
   constructor(order) {
-    // DO DATA VALIDATION HERE!
-    if (!order) throw new CustomError('Invalid order data', 400)
-    this.#id = order.id
-    this.#clientId = order.clientId
-    this.#prods = order.prods
-    this.#createdAt = order.createdAt
+    const data = validateData(orderSchema, order, 'Invalid order data.')
+    this.#id = data.id
+    this.#clientId = data.clientId
+    this.#prods = data.prods
+    this.#createdAt = data.createdAt
   }
   asDto = () =>
     Object.freeze({
