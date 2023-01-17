@@ -2,10 +2,10 @@ export class CustomError extends Error {
   #message
   #status
   #details
-  constructor(message, status, details = { type: 'Server Error' }) {
+  constructor(message, status, details) {
     super(message)
     this.#status = status
-    this.#details = details
+    this.#details = { type: 'Server Error', ...details }
   }
   get message() {
     return this.#message
