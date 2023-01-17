@@ -27,10 +27,12 @@ export class ProductsService {
     return createdProduct.asDto()
   }
   updateProduct = async (productId, newData) => {
-    const updatedProduct = await this.#repository.updateById(productId, {
-      ...newData,
-      id: productId
-    })
+    const product = await this.#repository.getById(productId)
+    if (!product) throw new CustomError('Product not found.', 404)
+
+    product.update(newData)
+    
+    const updatedProduct = await this.#repository.updateById(productId, product)
     if (!updatedProduct) throw new CustomError('Product not found.', 404)
     return updatedProduct.asDto()
   }
