@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 import { config } from '../config/index.js'
 
 const createHash = (password) => {
-  if(!password) throw new CustomError('Password not provided', 400)
+  if (!password) throw new CustomError('Password not provided', 400)
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 }
 const isPasswordValid = (user, password) =>
@@ -20,6 +20,7 @@ export class UsersService {
   }
   getUserById = async (userId) => {
     const user = await this.#repository.getById(userId)
+    // ? check password complexity
     if (!user) throw new CustomError('User not found.', 404)
     return user.asDto()
   }
