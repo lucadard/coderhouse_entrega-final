@@ -6,7 +6,7 @@ import { CustomError } from '../../models/CustomError.js'
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, config.staticPath)
+    cb(null, config.staticPath.folder + '/images')
   },
   filename: function (req, file, cb) {
     cb(null, randomUUID() + path.extname(file.originalname).toLowerCase())

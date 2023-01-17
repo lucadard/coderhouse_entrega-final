@@ -1,6 +1,14 @@
+import { config } from '../config/index.js'
+
 const imagesController = {
   upload: (req, res) => {
-    res.send({ success: true, imageUrl: req.file.path })
+    res.send({
+      success: true,
+      imageUrl: req.file.path.replace(
+        config.staticPath.folder,
+        config.staticPath.url
+      )
+    })
   }
 }
 
