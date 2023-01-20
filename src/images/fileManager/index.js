@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
 export const uploadImage = multer({
   storage,
   fileFilter: function (req, file, cb) {
-    const allowed = ['.jpg', '.jpeg', '.png']
+    const allowed = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']
     const ext = path.extname(file.originalname).toLowerCase()
     if (allowed.some((t) => ext.includes(t))) cb(null, true)
     else cb(new CustomError('Only images are allowed.', 405))
