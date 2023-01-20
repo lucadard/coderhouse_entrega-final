@@ -1,12 +1,14 @@
-import { randomUUID } from 'crypto'
 import { cartsService } from '../carts/index.js'
 import { CustomError } from '../models/CustomError.js'
 import { Order } from './models/Order.js'
-import { generateEmailText, sendOrderEmail } from '../config/nodemailer.js'
+import {
+  sendEmail,
+  generateAdminEmail,
+  generateUserEmail
+} from '../config/nodemailer.js'
 import { usersService } from '../users/index.js'
 
 const addCostToProducts = (products) => {
-  console.log(products)
   let productsWithCost = []
   for (let product of products) {
     const cost = product.cant * product.prod.price
@@ -29,7 +31,7 @@ export class OrdersService {
       throw new CustomError('Cart is empty, could not create order.', 400)
     const createdOrder = await this.#repository.create(
       new Order({
-        id: randomUUID(),
+        id: undefined,
         clientId,
         prods: addCostToProducts(cartData.products)
       })
@@ -40,10 +42,18 @@ export class OrdersService {
     const userData = await usersService.getUserById(clientId)
 
     try {
-      const info = await sendOrderEmail(
-        generateEmailText(userData, createdOrder.asDto())
+      // Send email to admin
+      await sendEmail(
+        'admin',
+        'Nueva orden ✔',
+        generateAdminEmail(userData, createdOrder.asDto())
       )
-      console.log('Email sent', info.messageId)
+      // Send email to user
+      await sendEmail(
+        userData.email,
+        'Nos llegó tu orden ✔',
+        generateUserEmail(createdOrder.asDto())
+      )
     } catch (err) {
       throw err
     }
