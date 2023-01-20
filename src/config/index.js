@@ -4,6 +4,7 @@ dotenv.config()
 checkVars()
 function checkVars() {
   const notSetVars = []
+  if (!process.env.MONGO_URL) notSetVars.push('MONGO_URL')
   if (!process.env.JWT_SECRET) notSetVars.push('JWT_SECRET')
   if (!process.env.EMAIL_SENDER_USER) notSetVars.push('EMAIL_SENDER_USER')
   if (!process.env.EMAIL_SENDER_PASS) notSetVars.push('EMAIL_SENDER_PASS')
@@ -15,13 +16,13 @@ function checkVars() {
 
 export const config = {
   admins: ['admin@admin.com'],
-  mongoUrl: 'mongodb://localhost:27017/coder',
   staticPath: {
     folder: 'static',
     url: '/public',
-    defaultProfilePicture: '/public/images/no_profile_photo.jpeg',
-    defaultProductPicture: '/public/images/no_product_photo.jpeg'
+    defaultProfilePicture: '/public/defaults/no-pfp.jpeg',
+    defaultProductPicture: '/public/defaults/no-prod.jpeg'
   },
+  mongoUrl: process.env.JWT_SECRET.MONGO_URL,
   jwtSecret: process.env.JWT_SECRET,
   environment: process.env.NODE_ENV || 'development',
   emailSender: {
