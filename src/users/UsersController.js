@@ -1,5 +1,6 @@
 import { cartsService } from '../carts/index.js'
 import { usersService } from './index.js'
+import { config } from '../config/index.js'
 
 const usersController = {
   getUser: async (req, res, next) => {
@@ -8,6 +9,7 @@ const usersController = {
       res.json({
         userData: {
           ...user,
+          admin: config.admins.includes(user.email),
           password: undefined // remove password from response
         }
       })
