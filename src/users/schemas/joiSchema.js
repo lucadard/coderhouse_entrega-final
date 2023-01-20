@@ -7,5 +7,7 @@ export const userSchema = Joi.object({
   password: Joi.string().required(),
   name: Joi.string().min(3).max(12).required(),
   lastname: Joi.string().min(3).max(20).required(),
-  image: Joi.string().default(config.staticPath.defaultProfilePicture)
+  image: Joi.string()
+    .allow('')
+    .default(config.staticPath.defaultProfilePicture)
 })
