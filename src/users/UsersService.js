@@ -30,6 +30,11 @@ export class UsersService {
       id: randomUUID(),
       password: createHash(userData.password)
     })
+    const [userAlreadyExists] = await this.#repository.getByQuery({
+      email: userData.email
+    })
+    if (userAlreadyExists) throw new CustomError('User already exists.', 400)
+
     const createdUser = await this.#repository.create(newUser)
     if (!createdUser) throw new CustomError('Could not create user.', 500)
     return createdUser.asDto()
