@@ -1,4 +1,4 @@
-import { validateData } from '../../config/validation.js'
+import { validateData } from '../../validation/index.js'
 import { userSchema } from '../schemas/joiSchema.js'
 export class User {
   #id

@@ -22,7 +22,7 @@ export const config = {
     defaultProfilePicture: '/public/defaults/no-pfp.jpeg',
     defaultProductPicture: '/public/defaults/no-prod.jpeg'
   },
-  mongoUrl: process.env.JWT_SECRET.MONGO_URL,
+  mongoUrl: process.env.MONGO_URL,
   jwtSecret: process.env.JWT_SECRET,
   environment: process.env.NODE_ENV || 'development',
   emailSender: {

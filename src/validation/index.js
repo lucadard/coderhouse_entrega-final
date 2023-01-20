@@ -1,4 +1,3 @@
-import Joi from 'joi'
 import { CustomError } from '../models/CustomError.js'
 
 export function validateData(
@@ -6,12 +5,6 @@ export function validateData(
   data,
   errMsg = 'Data validation failed: '
 ) {
-  // try {
-  // Joi.attempt(data, schema, errMsg, {
-  //   abortEarly: false,
-  //   allowUnknown: true
-  // })
-  // return true
   const { value, error } = schema.validate(data, {
     abortEarly: false,
     allowUnknown: true

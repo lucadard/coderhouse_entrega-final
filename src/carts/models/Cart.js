@@ -1,4 +1,4 @@
-import { validateData } from '../../config/validation.js'
+import { validateData } from '../../validation/index.js'
 import { CustomError } from '../../models/CustomError.js'
 import { cartsSchema } from '../schemas/joiSchema.js'
 

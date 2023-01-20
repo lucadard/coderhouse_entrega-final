@@ -5,7 +5,7 @@ import {
   sendEmail,
   generateAdminEmail,
   generateUserEmail
-} from '../config/nodemailer.js'
+} from './lib/nodemailer.js'
 import { usersService } from '../users/index.js'
 
 const addCostToProducts = (products) => {

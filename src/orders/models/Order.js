@@ -1,4 +1,4 @@
-import { validateData } from '../../config/validation.js'
+import { validateData } from '../../validation/index.js'
 import { orderSchema } from '../schemas/joiSchema.js'
 
 export class Order {
