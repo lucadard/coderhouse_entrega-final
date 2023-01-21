@@ -1,6 +1,6 @@
 import passport from 'passport'
 import { CustomError } from '../models/CustomError.js'
-import { vars } from '../config/vars.js'
+import { vars } from '../../config/vars.js'
 
 const handleJWT = (req, res, next, options) => async (err, user, info) => {
   try {

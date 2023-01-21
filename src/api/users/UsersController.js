@@ -1,6 +1,6 @@
 import { cartsService } from '../carts/index.js'
 import { usersService } from './index.js'
-import { vars } from '../config/vars.js'
+import { vars } from '../../config/vars.js'
 
 const usersController = {
   getUser: async (req, res, next) => {

@@ -1,6 +1,6 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import { vars } from './vars.js'
-import { usersService } from '../users/index.js'
+import { usersService } from '../api/users/index.js'
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

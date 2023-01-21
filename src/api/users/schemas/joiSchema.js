@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { vars } from '../../config/vars.js'
+import { vars } from '../../../config/vars.js'
 
 export const userSchema = Joi.object({
   id: Joi.string().required(),

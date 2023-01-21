@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 import multer from 'multer'
 import path from 'path'
 import { vars } from './vars.js'
-import { CustomError } from '../models/CustomError.js'
+import { CustomError } from '../api/models/CustomError.js'
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

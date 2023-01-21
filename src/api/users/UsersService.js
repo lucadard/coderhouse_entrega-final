@@ -3,7 +3,7 @@ import { User } from './models/User.js'
 import { CustomError } from '../models/CustomError.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { vars } from '../config/vars.js'
+import { vars } from '../../config/vars.js'
 
 const createHash = (password) => {
   if (!password) throw new CustomError('Password not provided', 400)

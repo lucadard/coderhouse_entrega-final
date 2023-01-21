@@ -1,4 +1,4 @@
-import { usersService } from '../../users/index.js'
+import { usersService } from '../users/index.js'
 
 const authController = {
   login: async (req, res, next) => {
