@@ -10,7 +10,6 @@ import { productsRouter } from './api/products/index.js'
 import { usersRouter } from './api/users/index.js'
 
 import { vars } from './config/vars.js'
-import { reqLogger } from './api/middlewares/logger.js'
 import { errorHandler } from './api/middlewares/error.js'
 import { strategies } from './config/passport.js'
 
@@ -18,7 +17,6 @@ const app = express()
 
 /* MIDDLEWARES */
 app.use(cors())
-app.use(reqLogger)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(vars.staticPath.url, express.static(vars.staticPath.folder))

@@ -1,10 +1,12 @@
 import { Router } from 'express'
+import { reqLogger } from '../middlewares/logger.js'
 import { authorize } from '../middlewares/auth.js'
 import { ProductsController } from './ProductsController.js'
 const productsController = ProductsController.getController()
 
 const productsRouter = Router()
 
+productsRouter.use(reqLogger)
 productsRouter.get('/', productsController.getProducts)
 productsRouter.get('/:productId', productsController.getProductById)
 productsRouter.post(
