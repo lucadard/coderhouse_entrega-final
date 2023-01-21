@@ -1,14 +1,14 @@
-import { vars } from '../config/vars.js'
+import { logger } from '../../config/logger.js'
+import { vars } from '../../config/vars.js'
 
 export const errorHandler = (err, req, res, next) => {
-  const errStatus = err.status || 500
-  const errMsg = err.message || 'Something went wrong'
-  const errDetails = err.details || undefined
-  res.status(errStatus).json({
+  const errorObj = {
     success: false,
-    status: errStatus,
-    message: errMsg,
-    details: errDetails,
+    status: err.status || 500,
+    message: err.message || 'Something went wrong',
+    details: err.details || undefined,
     stack: vars.environment === 'development' ? err.stack : undefined
-  })
+  }
+  logger.error(errorObj)
+  res.status(errorObj.status).json(errorObj)
 }
