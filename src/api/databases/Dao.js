@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-import { vars } from '../config/vars.js'
+import { vars } from '../../config/vars.js'
+import { logger } from '../../config/logger.js'
+mongoose.set('strictQuery', false)
 
 export default class Dao {
   #collection
@@ -13,12 +15,10 @@ export default class Dao {
   connect() {
     mongoose.connect(vars.mongoUrl)
     mongoose.connection.on('connected', () =>
-      console.log(`MongoDB: Connected to ${this.#collectionName} collection.`)
+      logger.info(`MongoDB: Connected to ${this.#collectionName} collection.`)
     )
-    mongoose.connection.on('error', () =>
-      console.log(
-        `MongoDB: Couldn't connect to ${this.#collectionName} collection.`
-      )
+    mongoose.connection.on('error', (err) =>
+      logger.error(`MongoDB connection error: ${err}`)
     )
   }
   async getById(id) {
