@@ -2,12 +2,16 @@ import dotenv from 'dotenv'
 import { logger } from './logger.js'
 dotenv.config()
 
-logger.info('Environment: ' + process.env.NODE_ENV)
+logger.info(
+  `Environment ${
+    process.env.NODE_ENV !== 'development' ? 'production' : 'development'
+  }`
+)
 
 checkVars()
 function checkVars() {
   const notSetVars = []
-  if (process.env.NODE_ENV === 'production')
+  if (process.env.NODE_ENV !== 'development')
     if (!process.env.MONGO_PROD_URL) notSetVars.push('MONGO_PROD_URL')
     else {
       if (!process.env.MONGO_DEV_URL) notSetVars.push('MONGO_DEV_URL')
@@ -33,7 +37,7 @@ export const vars = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
   mongoUrl:
-    process.env.NODE_ENV === 'production'
+    process.env.NODE_ENV !== 'development'
       ? process.env.MONGO_PROD_URL
       : process.env.MONGO_DEV_URL,
   emailConfig: {
