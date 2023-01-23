@@ -1,5 +1,5 @@
 import { Repository } from '../databases/Repository.js'
-import { UsersDaoFactory } from './UsersDAOFactory.js'
+import { UsersDaoFactory } from './UsersDaoFactory.js'
 import { UsersRouter } from './UsersRouter.js'
 import { UsersService } from './UsersService.js'
 import { User } from './models/User.js'
