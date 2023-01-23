@@ -7,7 +7,7 @@ const usersController = UsersController.getController()
 const usersRouter = Router()
 
 usersRouter.use(reqLogger)
-usersRouter.get('/', authorize({ admin: true }), usersController.getUser) // Solo para usuarios logueados
+usersRouter.get('/', authorize(), usersController.getUser) // Solo para usuarios logueados
 usersRouter.post('/', usersController.registerUser)
 
 export class UsersRouter {
