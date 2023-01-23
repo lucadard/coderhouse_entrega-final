@@ -36,6 +36,6 @@ export async function createServer(PORT) {
   return new Promise((res, rej) => {
     const server = app.listen(PORT)
     server.on('listening', () => res(server))
-    server.on('error', () => rej(err))
+    server.on('error', (err) => rej(err))
   })
 }
