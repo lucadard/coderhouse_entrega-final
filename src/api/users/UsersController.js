@@ -5,14 +5,8 @@ import { vars } from '../../config/vars.js'
 const usersController = {
   getUser: async (req, res, next) => {
     try {
-      const user = await usersService.getUserById(req.user.id) // req.user is data from jwt
-      res.json({
-        userData: {
-          ...user,
-          admin: vars.admins.includes(user.email),
-          password: undefined // remove password from response
-        }
-      })
+      const user = await usersService.getUserDetails(req.user.id) // req.user is data from jwt
+      res.json({ userData: user })
     } catch (err) {
       next(err)
     }
