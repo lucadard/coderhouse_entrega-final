@@ -20,15 +20,24 @@ export class UsersService {
   }
   getUserById = async (userId) => {
     const user = await this.#repository.getById(userId)
-    // ? check password complexity
     if (!user) throw new CustomError('User not found.', 404)
     return user.asDto()
+  }
+  getUserDetails = async (userId) => {
+    const user = await this.#repository.getById(userId)
+    if (!user) throw new CustomError('User not found.', 404)
+    return {
+      ...user.asDto(),
+      password: undefined,
+      admin: vars.admins.includes(user.asDto().email)
+    }
   }
   addUser = async (userData) => {
     const newUser = new User({
       ...userData,
       id: randomUUID(),
       password: createHash(userData.password)
+      // ? check password complexity
     })
     const [userAlreadyExists] = await this.#repository.getByQuery({
       email: userData.email
