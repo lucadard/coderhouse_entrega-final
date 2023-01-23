@@ -7,4 +7,5 @@ try {
   logger.info(`Server listening on port ${server.address().port}`)
 } catch (err) {
   logger.error(err)
+  process.exit(1)
 }
