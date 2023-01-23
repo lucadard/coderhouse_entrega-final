@@ -1,3 +1,4 @@
+import { vars } from '../../../config/vars.js'
 import { validateData } from '../../validation/joi.js'
 import { productSchema, updateSchema } from '../schemas/joiSchema.js'
 
@@ -8,6 +9,7 @@ export class Product {
   #price
   #image
   constructor(product) {
+    if (!product.image) product.image = vars.staticPath.defaultProductPicture
     const data = validateData(productSchema, product, 'Invalid product data.')
     this.#id = data.id
     this.#name = data.name
