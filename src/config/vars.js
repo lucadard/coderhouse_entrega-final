@@ -10,8 +10,7 @@ export const vars = {
   staticPath: {
     folder: 'static',
     url: '/public',
-    defaultProfilePicture: '/public/defaults/no-pfp.jpeg',
-    defaultProductPicture: '/public/defaults/no-prod.jpeg'
+    defaultProductPicture: '/public/defaults/no-product-photo.webp'
   },
   environment: process.env.NODE_ENV,
   port: process.env.PORT,
