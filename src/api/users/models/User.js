@@ -8,8 +8,8 @@ export class User {
   #lastname
   #image
   constructor(user) {
-    if (!data.image)
-      data.image = `https://api.dicebear.com/5.x/initials/jpg?seed=${user.name}`
+    if (!user.image)
+      user.image = `https://api.dicebear.com/5.x/initials/jpg?seed=${user.name}`
     const data = validateData(userSchema, user, 'Invalid user data.')
     this.#id = data.id
     this.#email = data.email
