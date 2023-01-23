@@ -9,8 +9,8 @@ const jwtOptions = {
 
 const jwt = async (payload, done) => {
   try {
-    const user = await usersService.getUserById(payload.id)
-    if (user) return done(null, { id: user.id })
+    const user = await usersService.getUserDetails(payload.id)
+    if (user) return done(null, user)
     else return done(null, false)
   } catch (err) {
     return done(err, false)
