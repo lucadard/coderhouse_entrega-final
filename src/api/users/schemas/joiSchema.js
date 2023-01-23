@@ -1,5 +1,4 @@
 import Joi from 'joi'
-import { vars } from '../../../config/vars.js'
 
 export const userSchema = Joi.object({
   id: Joi.string().required(),
@@ -8,6 +7,4 @@ export const userSchema = Joi.object({
   name: Joi.string().min(3).max(12).required(),
   lastname: Joi.string().min(3).max(20).required(),
   image: Joi.string()
-    .allow('')
-    .default(vars.staticPath.defaultProfilePicture)
 })
