@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import { vars } from './vars.js'
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
+  host: vars.emailConfig.host,
   port: 587,
   secure: false,
   auth: {

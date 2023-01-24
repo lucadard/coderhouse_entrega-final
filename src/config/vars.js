@@ -10,7 +10,7 @@ export const vars = {
   staticPath: {
     folder: 'static',
     url: '/public',
-    defaultProductPicture: '/public/defaults/no-product-photo.webp'
+    defaultProductPicture: '/public/images/no-product-photo.webp'
   },
   environment: process.env.NODE_ENV,
   port: process.env.PORT,
@@ -20,6 +20,7 @@ export const vars = {
       ? process.env.MONGO_PROD_URL
       : process.env.MONGO_DEV_URL,
   emailConfig: {
+    host: process.env.EMAIL_SENDER_HOST,
     user: process.env.EMAIL_SENDER_USER,
     pass: process.env.EMAIL_SENDER_PASS
   }
@@ -33,6 +34,7 @@ function checkVars() {
     if (!process.env.MONGO_DEV_URL) notSetVars.push('MONGO_DEV_URL')
   }
   if (!process.env.JWT_SECRET) notSetVars.push('JWT_SECRET')
+  if (!process.env.EMAIL_SENDER_HOST) notSetVars.push('EMAIL_SENDER_HOST')
   if (!process.env.EMAIL_SENDER_USER) notSetVars.push('EMAIL_SENDER_USER')
   if (!process.env.EMAIL_SENDER_PASS) notSetVars.push('EMAIL_SENDER_PASS')
   if (notSetVars.length > 0)
