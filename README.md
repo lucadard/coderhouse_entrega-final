@@ -32,7 +32,7 @@ EMAIL_SENDER_HOST
 EMAIL_SENDER_USER
 EMAIL_SENDER_PASS
 ```
-The variables specified in that file are read by the object found in `/src/api/config/vars.js` which has a few more parameters that you can change. The most important is the named `admins`, you can manipulate the array to add and remove admins privileges to users by their email. 
+The variables specified in that file are read by the object found in `/src/api/config/vars.js` which has a few more parameters that you can change. The most important is the named `admins`, you can manipulate the array to add or remove admin privileges to users with their email. 
 ```js
 export const vars = {
   admins: ['admin@admin.com'],
@@ -89,7 +89,7 @@ To access some endpoints you need to have admin rights which can be given manual
 # Resources
 ## Products
 The product object follows this pattern:
-```json
+```ts
 {
     "id": string,
     "name": string,
